@@ -1,0 +1,18 @@
+.example-full-width-table{
+	width: 30%;
+	tr,td,.mat-form-field{width: 100%;}
+}
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+.question-form{
+  // td{width: 60%!important;}
+  tr,td,.mat-form-field{width: 60%!important;}
+}
+
+.example-radio-button {
+  margin: 5px;
+}

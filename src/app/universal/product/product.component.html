@@ -1,0 +1,55 @@
+<div class="productList">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-2">
+				<h2>Category filter</h2>
+				<mat-selection-list #cat [multiple]="false" (selectionChange)="categoryFilter(cat.selectedOptions.selected[0]?.value,'pro')">
+				  <mat-list-option *ngFor="let cat of category" [value]="cat">
+				    {{cat}}
+				  </mat-list-option>
+				</mat-selection-list>
+				<h2>Sub-category filter</h2>
+				<mat-selection-list #subcat [multiple]="false" *ngIf="subcategory.length > 0" (selectionChange)="subcategoryFilter(subcat.selectedOptions.selected[0]?.value)">
+				  <mat-list-option *ngFor="let subcat of subcategory" [value]="subcat">
+				    {{subcat.title}}
+				  </mat-list-option>
+				</mat-selection-list>
+				<h2>Color filter</h2>
+				<mat-selection-list #color [multiple]="false" (selectionChange)="colorFilter(color.selectedOptions.selected[0]?.value)">
+				  <mat-list-option *ngFor="let color of colorList" [value]="color">
+				    {{color.title}}
+				  </mat-list-option>
+				</mat-selection-list>
+				<h2>Size filter</h2>
+				<mat-selection-list #size [multiple]="false" (selectionChange)="sizeFilter(size.selectedOptions.selected[0]?.value)">
+				  <mat-list-option *ngFor="let size of sizeList" [value]="size">
+				    {{size.title}}
+				  </mat-list-option>
+				</mat-selection-list>
+			</div>
+			<div class="col-10">
+				<h2>Product list</h2>
+				<div class="row">
+					<div class="col-3" *ngFor="let product of products" style="margin-bottom: 5%;">
+						<mat-card class="example-card">
+						  <mat-card-header>
+						    <mat-card-title>{{product.title.substring(0,25)}}</mat-card-title>
+						    <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+						  </mat-card-header>
+						  <img mat-card-image src="{{product.image}}" alt="{{product.title}}" style="height: 50vh;">
+						  <mat-card-content>
+						    <p>
+						     {{product.description.substring(0,80)}}
+						    </p>
+						  </mat-card-content>
+						  <!-- <mat-card-actions>
+						    <button mat-button>LIKE</button>
+						    <button mat-button>SHARE</button>
+						  </mat-card-actions> -->
+						</mat-card>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
