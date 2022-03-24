@@ -55,7 +55,6 @@ export class UniversalComponent implements OnInit {
   }
 
   companyEditFormSubmit(){
-    console.log(this.taskForm.value,'1111111111')
   }
 
   passwordMatchFunction(){
@@ -73,7 +72,6 @@ export class UniversalComponent implements OnInit {
     //   this.firstForm = false;
     //   this.secondForm = true;
     // }
-    console.log(this.taskForm.value['name'],'nameeeeeeeeee')
     // if(this.taskForm.value['name'] != '' && this.taskForm.value['email'] != '' && this.taskForm.value['phone'] && this.taskForm.value['password'] != ''){
     //   this.firstForm = false;
     //   this.secondForm = true;
