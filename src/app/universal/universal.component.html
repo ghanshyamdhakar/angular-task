@@ -1,5 +1,5 @@
 <div class="companyDetail">
-	<mat-card class="example-card">
+	<!-- <mat-card class="example-card">
 		<h4 routerLink="/product" style="cursor: pointer; color: blue;">Product List Link</h4>
 
 		<mat-card-header>
@@ -210,6 +210,110 @@
 	    	<button mat-raised-button color="warn" type="button" (click)="nextButtonSecondForm()" *ngIf="!firstForm && secondForm && !thirdForm">Next</button>
 	    </form>
 	  </mat-card-content>
-	</mat-card>
+	</mat-card> -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 mt-5">
+				<form [formGroup]="weekForm" (ngSubmit)="addWeekForm()">
+					<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+						<div formArrayName="weeks" *ngFor="let week of weeks().controls; let i=index">
+							<div [formGroupName]="i">
+								<ul class="nav nav-tabs" id="myTab" role="tablist">
+								  <li class="nav-item" role="presentation">
+								    <!-- <input type="checkbox" name="saturday1" class="btn-check" id="sunday1{{i}}" autocomplete="off" formControlName="day" value="sunday">
+							  		<label class="nav-link active" id="home-tab" data-toggle="tab" href="#home{{i}}" role="tab" aria-controls="home" aria-selected="true" for="sunday1{{i}}">{{i}}</label> -->
+							  		<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home{{i}}" role="tab" aria-controls="home" aria-selected="true">{{i}}</a>
+								  </li>
+								</ul>
+									
+								<div class="tab-content">
+  									<div class="tab-pane active" id="home{{i}}" role="tabpanel" aria-labelledby="home-tab">
+  										<div formArrayName='skills' class="item_jobcard">
+											<div  *ngFor="let skill of weekSkills(i).controls; let j=index">
+												<div [formGroupName]="j">
+													<div class="row">
+														<div class="col-4">
+															<select class="form-select" aria-label="Default select example" formControlName="type">
+															  <option selected>Open this select menu</option>
+															  <option value="One">One</option>
+															  <option value="Two">Two</option>
+															  <option value="Three">Three</option>
+															</select>
+														</div>
+														<div class="col-4">
+															<input type="time" class="form-control" placeholder="First name" aria-label="First name" formControlName="start_time">
+														</div>
+														<div class="col-4">
+															<input type="time" class="form-control" placeholder="First name" aria-label="First name" formControlName="end_time">
+														</div>
+													</div>
+													<button (click)="removeEmployeeSkill(i,j)">Remove</button>
+												</div>	
+											</div>
+											<h2>{{i}}</h2>
+										</div>
+										<button type="button" (click)="addWeekSkill(i)" class="btn btn-primary"> add skills </button>
+										
+  									</div>
+  								</div>
+							  	<!-- <div>
+							  		<button type="button" (click)="addWeekSkill(i)" class="btn btn-primary"> add skills</button>
+								  	<div formArrayName='skills' class="item_jobcard">
+										<div  *ngFor="let skill of weekSkills(i).controls; let j=index">
+											<div [formGroupName]="j">
+												<div class="row">
+													<div class="col-4">
+														<select class="form-select" aria-label="Default select example" formControlName="type">
+														  <option selected>Open this select menu</option>
+														  <option value="One">One</option>
+														  <option value="Two">Two</option>
+														  <option value="Three">Three</option>
+														</select>
+													</div>
+													<div class="col-4">
+														<input type="time" class="form-control" placeholder="First name" aria-label="First name" formControlName="start_time">
+													</div>
+													<div class="col-4">
+														<input type="time" class="form-control" placeholder="First name" aria-label="First name" formControlName="end_time">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div> -->
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+					  <li class="nav-item" role="presentation">
+					    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+					  </li>
+					  <li class="nav-item" role="presentation">
+					    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+					  </li>
+					  <li class="nav-item" role="presentation">
+					    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+					  </li>
+					</ul>
+					<div class="tab-content" id="pills-tabContent">
+					  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">1...</div>
+					  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">2...</div>
+					  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">3...</div>
+					</div>
+			</div>
+		</div>
+	</div>
 	<div class='p-b'></div>
 </div>
