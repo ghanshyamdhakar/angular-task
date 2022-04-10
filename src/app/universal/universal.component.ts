@@ -47,14 +47,232 @@ export class UniversalComponent implements OnInit {
     { name: 'England', value: 'England' },
     { name: 'France', value: 'France' }
   ];
-  constructor(private fb:FormBuilder) {
 
+  weekList: Array<any> = [
+    { name: 'Sunday', value: 'Sunday' },
+    { name: 'Monday', value: 'Monday' },
+    { name: 'Tuesday', value: 'Tuesday' },
+    { name: 'Wednesday', value: 'Wednesday' },
+    { name: 'Thrusday', value: 'Thrusday' },
+    { name: 'Friday', value: 'Friday' },
+    { name: 'Saturday', value: 'Saturday' },
+  ];
+
+  // prodData:any = {
+  //   groups: [
+  //     {
+  //       id: 'sunday',
+  //       name: 'sunday',
+  //       products: [
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 'monday',
+  //       name: 'monday',
+  //       products: [
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         },
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 'tuesday',
+  //       name: 'tuesday',
+  //       products: [
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         },
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 'wednesday',
+  //       name: 'wednesday',
+  //       products: [
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         },
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 'thrusday',
+  //       name: 'thrusday',
+  //       products: [
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         },
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 'friday',
+  //       name: 'friday',
+  //       products: [
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         },
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 'saturday',
+  //       name: 'saturday',
+  //       products: [
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         },
+  //         {
+  //           type: '',
+  //           start_time: '',
+  //           end_time: '',
+  //         }
+  //       ]
+  //     },
+  //   ]
+  // };
+
+  weekForm:FormGroup;
+// productionForm:FormGroup;
+  active = 0;
+
+  constructor(private fb:FormBuilder) {
+    this.weekForm = this.fb.group({
+      weeks: this.fb.array(this.weekList.map((wk:any) => 
+      this.fb.group({
+        day: '',
+        skills: this.fb.array([])
+      }))),
+    });
+
+    // this.weekForm = this.fb.group({
+    //   weeks: this.fb.array([
+    //     this.newWeekSunday(),
+    //     this.newWeekTuesday(),
+    //   ])
+    // });
+
+    // this.productionForm = this.fb.group({
+    //   production: this.fb.array(
+    //     this.prodData
+    //       // for each...
+    //       .groups
+    //       .reduce((acc:any, group:any) => [
+    //         ...acc,
+    //         // ...product of each group
+    //         ...group.products.map((product:any) =>
+    //           // create a form group
+    //           this.fb.group({
+    //             type: [''],
+    //             start_time: [''],
+    //             end_time: [''],
+    //           })
+    //         )
+    //       ], [])
+    //   )
+    // })
+    
   }
 
   ngOnInit(): void {
+    
+  }
+
+  weeks(): FormArray {
+    return this.weekForm.get('weeks') as FormArray;
+  }
+
+  newWeek(): FormGroup {
+    return this.fb.group({
+      day: '',
+      skills: this.fb.array([])
+    });
+  }
+
+  newWeekSunday(): FormGroup {
+    return this.fb.group({
+      day: '',
+      skills: this.fb.array([])
+    });
+  }
+  newWeekTuesday(): FormGroup {
+    return this.fb.group({
+      day: '',
+      skills: this.fb.array([])
+    });
+  }
+
+  addEmployee() {
+    this.weeks().push(this.newWeek());
+  }
+
+  weekSkills(i: number): FormArray {
+    return this.weeks()
+      .at(i)
+      .get('skills') as FormArray;
+  }
+
+  newSkill(): FormGroup {
+    return this.fb.group({
+      type: '',
+      start_time: '',
+      end_time: '',
+    });
+  }
+
+  addWeekSkill(i: number) {
+    this.weekSkills(i).push(this.newSkill());
+  }
+
+  removeEmployeeSkill(i: number, j: number) {
+    this.weekSkills(i).removeAt(j);
+  }
+ 
+
+  addWeekForm(){
+    console.log(this.weekForm.value);
   }
 
   companyEditFormSubmit(){
+    console.log(this.taskForm.value,'1111111111')
   }
 
   passwordMatchFunction(){
@@ -72,6 +290,7 @@ export class UniversalComponent implements OnInit {
     //   this.firstForm = false;
     //   this.secondForm = true;
     // }
+    console.log(this.taskForm.value['name'],'nameeeeeeeeee')
     // if(this.taskForm.value['name'] != '' && this.taskForm.value['email'] != '' && this.taskForm.value['phone'] && this.taskForm.value['password'] != ''){
     //   this.firstForm = false;
     //   this.secondForm = true;
